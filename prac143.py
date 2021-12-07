@@ -1,0 +1,17 @@
+#백준 11497 다른풀이
+
+from sys import stdin
+
+
+t = int(stdin.readline())
+
+for _ in range(t):
+    n = int(stdin.readline())
+    heights = [int(x) for x in stdin.readline().split()]
+    heights.sort()
+
+    max_level = 0
+    for i in range(2, n):
+        max_level = max(max_level, abs(heights[i] - heights[i - 2]))
+
+    print(max_level)
