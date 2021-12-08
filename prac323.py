@@ -1,4 +1,5 @@
-#프로그래머스 가장 큰 수 못품
+#프로그래머스 가장 큰 수
 def solution(numbers):
-    answer = ''
-    return answer
+    numbers=list(map(str,numbers))
+    numbers.sort(key=lambda x:x*3, reverse=True)    
+    return str(int(''.join(numbers)))

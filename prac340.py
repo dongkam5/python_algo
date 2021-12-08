@@ -20,6 +20,3 @@ def solution(board):
                 line=max(line,(j-i+1))
     answer=line**2
     return answer
-
-#print(solution([[0,0,1,1],[1,1,1,1]]))
-print(solution([[0 for _ in range(1000)] for _ in range(1000)]))
