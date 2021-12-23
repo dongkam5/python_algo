@@ -1,4 +1,4 @@
-#프로그래머스 메뉴 리뉴얼
+#프로그래머스 메뉴 리뉴얼 시간초과
 
 def solution(orders, course):
     import itertools
