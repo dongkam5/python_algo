@@ -1,37 +1,20 @@
-# 프로그래머스 섬 연결하기
+# 프로그래머스 N으로 표현
 
-def solution(n, costs):
+def solution(N, number):
     answer = 0
-    costs.sort(key=lambda x: x[2])
-    island = {}
-    cnt = 0
-    for i in range(n):
-        island[i] = 0
-    a, b, c = costs.pop(0)
-    island[a] += 1
-    island[b] += 1
-    answer += c
-    cnt += 1
-    while cnt != n-1:
-        for i in range(len(costs)):
-            a, b, c = costs[i]
-            if island[a] >= 1 and island[b] >= 1:
-                continue
-            elif island[a] >= 1 and island[b] < 1:
-                island[a] += 1
-                island[b] += 1
-                answer += c
-                cnt += 1
-                costs.pop(i)
-                break
-            elif island[a] < 1 and island[b] >= 1:
-                island[a] += 1
-                island[b] += 1
-                answer += c
-                cnt += 1
-                costs.pop(i)
-                break
+    dp = [10000]*(1000000)
+    for i in range(1, 7):
+        s = str(N)*i
+        dp[int(s)] = i
+    for i in range(2, 100000):
+        if i > N:
+            dp[i] = min(dp[i], dp[i*N]+1, dp[i+N] + 1, dp[i-N]+1,)
+        else:
+            dp[i] = min(dp[i], dp[i*N]+1, dp[i+N]+1)
+    answer = dp[number]
+    if answer >= 8:
+        answer = -1
     return answer
 
 
-print(solution(4, [[0, 1, 1], [0, 2, 2], [1, 2, 5], [1, 3, 1], [2, 3, 8]]))
+print(solution(9, 8))
