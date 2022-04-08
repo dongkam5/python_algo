@@ -1,20 +1,29 @@
-# 백준 2473 못품
-import sys
-import itertools
-input = sys.stdin.readline
-N = int(input())
-lst = list(map(int, input().split()))
-val = {}
-permu = itertools.combinations(lst, 3)
-temp = 1000000001
-for p in permu:
-    s = sum(p)
-    val[s] = p
+# 프로그래머스 디스크 컨트롤
+def solution(jobs):
+    answer = 0
+    schedule = []
+    jobs.sort()
+    length = len(jobs)
+    end = 0
+    while jobs:
+        if schedule:
+            start, spend = schedule.pop()
+            answer += (spend+end-start)
+            end += spend
+        else:
+            start, spend = jobs.pop(0)
+            answer += spend
+            end = start+spend
+        while jobs and jobs[0][0] <= end:
+            schedule.append(jobs.pop(0))
+        schedule.sort(key=lambda x: -x[1])
+    schedule.sort(key=lambda x: -x[1])
+    while schedule:
+        start, spend = schedule.pop()
+        answer += (spend+end-start)
+        end += spend
+    answer = answer//length
+    return answer
 
-for key in val.keys():
-    if abs(key) < temp:
-        temp = abs(key)
-        answer = val[key]
-answer = list(answer)
-answer.sort()
-print(*answer)
+
+print(solution([[1, 1], [1, 2], [1, 3]]))
