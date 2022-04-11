@@ -1,4 +1,4 @@
-# 프로그래머스 N으로 표현
+# 프로그래머스 N으로 표현 아직 못품
 
 def solution(N, number):
     answer = 0
