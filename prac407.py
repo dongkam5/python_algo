@@ -2,17 +2,15 @@
 
 import math
 from itertools import combinations
+from collections import defaultdict
 
 
 def solution(user_id, banned_id):
     answer = 1
     user_id.sort()
     banned_id.sort()
-    ban = {}
-    ban_id_cnt = {}
-    for bid in banned_id:
-        ban[bid] = []
-        ban_id_cnt[bid] = 0
+    ban = defaultdict(list)
+    ban_id_cnt = defaultdict(int)
     for bid in banned_id:
         for id in user_id:
             if len(id) == len(bid):

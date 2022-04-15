@@ -9,7 +9,7 @@ def solution(n, money):
         k = 0
         for m in money:
             if i > m:
-                dp[i] += dp[i-m]*dp[m]
+                dp[i] += dp[i//m]
             else:
                 break
     print(dp[:n+1])

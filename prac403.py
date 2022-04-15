@@ -1,20 +1,24 @@
-# 프로그래머스 N으로 표현 아직 못품
+# 프로그래머스 N으로 표현
 
 def solution(N, number):
-    answer = 0
-    dp = [10000]*(1000000)
-    for i in range(1, 7):
-        s = str(N)*i
-        dp[int(s)] = i
-    for i in range(2, 100000):
-        if i > N:
-            dp[i] = min(dp[i], dp[i*N]+1, dp[i+N] + 1, dp[i-N]+1,)
-        else:
-            dp[i] = min(dp[i], dp[i*N]+1, dp[i+N]+1)
-    answer = dp[number]
-    if answer >= 8:
-        answer = -1
+    answer = -1
+    dp = []
+
+    for i in range(1, 9):
+        all_case = set()
+        check_number = int(str(N)*i)
+        all_case.add(check_number)
+
+        for j in range(0, i-1):
+            for x in dp[j]:
+                for y in dp[-j-1]:
+                    all_case.add(x+y)
+                    all_case.add(x*y)
+                    all_case.add(x-y)
+                    if y:
+                        all_case.add(x//y)
+        if number in all_case:
+            answer = i
+            break
+        dp.append(all_case)
     return answer
-
-
-print(solution(9, 8))
