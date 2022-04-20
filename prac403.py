@@ -8,7 +8,6 @@ def solution(N, number):
         all_case = set()
         check_number = int(str(N)*i)
         all_case.add(check_number)
-
         for j in range(0, i-1):
             for x in dp[j]:
                 for y in dp[-j-1]:

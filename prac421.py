@@ -1,4 +1,4 @@
-# 백준 7662
+# 백준 7662 이중 우선순위 큐
 import sys
 import heapq
 input = sys.stdin.readline
