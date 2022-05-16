@@ -1,33 +1,39 @@
 # 백준 1753 최단경로
-from collections import deque
 import sys
 import heapq
+from collections import defaultdict
 input = sys.stdin.readline
 
 V, E = map(int, input().split())
 K = int(input())
-link = [[] for _ in range(V+1)]
+graph = defaultdict(list)
 for _ in range(E):
     a, b, cost = map(int, input().split())
-    heapq.heappush(link[a], (cost, b))
-cost = [10**7]*(V+1)
-cost[K] = 0
+    graph[a].append([b, cost])
 
 
-def search(K):
-    q = deque([])
-    q.append(K)
-    while q:
-        node = q.popleft()
-        for c, val in link[node]:
-            if cost[val] > cost[node]+c:
-                cost[val] = cost[node]+c
-                q.append(val)
+def dijkstra(graph, start):
+    distances = {node: float('INF') for node in range(1, V+1)}
+    distances[start] = 0
+    queue = []
+    heapq.heappush(queue, [distances[start], start])
+    while queue:
+        current_distance, current_destination = heapq.heappop(queue)
+
+        if distances[current_destination] < current_distance:
+            continue
+
+        for new_destination, new_distance in graph[current_destination]:
+            distance = current_distance+new_distance
+            if distance < distances[new_destination]:
+                distances[new_destination] = distance
+                heapq.heappush(queue, [distance, new_destination])
+    return distances
 
 
-search(K)
-for i in range(1, V+1):
-    if cost[i] == 10**7:
+distances = dijkstra(graph, K)
+for val in distances.values():
+    if val == float('inf'):
         print('INF')
     else:
-        print(cost[i])
+        print(val)
