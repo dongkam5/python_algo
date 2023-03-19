@@ -1,29 +1,39 @@
-#백준 1654 랜선 자르기
-K,N=map(int,input().split())
-lans=[]
-lans_sum=0
-lans_end=0
-lans_start=0
-temp=0
-answer=0
-for _ in range(K):
-    lan=int(input())
-    lans_sum+=lan
-    lans.append(lan)
-lans_end=(lans_sum//N)+1
+#백준 18111 마인크래프트
+import sys
+input=sys.stdin.readline
 
-while True:
+N,M,B=map(int,input().split())
+field=[]
+block_sum=0
+block_max=0
+ans_cnt,ans_cri=10**9,-10**9
+for _ in range(N):
+    line=list(map(int,input().split()))
+    block_max=max(block_max,max(line))
+    block_sum+=sum(line)
+    field.append(line)
+block_avg=block_sum//(N*M)
+for k in range(block_avg,block_max+1):
+    block_needs=0
     cnt=0
-    if lans_start==lans_end:
+    diff=0
+    for i in range(N):
+        for j in range(M):
+            if k>field[i][j]:
+                diff=k-field[i][j]
+                cnt+=diff
+                block_needs+=(diff)
+            elif k<field[i][j]:
+                diff=field[i][j]-k
+                cnt+=diff*2
+                block_needs-=(diff)
+    if block_needs>B:
         break
-    temp=(lans_end+lans_start)//2
-    for lan in lans:
-        cnt+=lan//temp
-        if cnt>=N:
-            answer=temp
-            lans_start=temp+1
-            break
-    if cnt<N:
-        lans_end=(temp)
+    if ans_cnt>cnt:
+        ans_cnt=cnt
+        ans_cri=k
+    elif ans_cnt==cnt and ans_cri<k:
+        ans_cnt=cnt
+        ans_cri=k
 
-print(answer)
+print(ans_cnt,ans_cri)
