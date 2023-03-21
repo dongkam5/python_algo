@@ -2,28 +2,38 @@
 import heapq
 import sys
 input=sys.stdin.readline
-N=int(input())
-for _ in range(N):
-    T=int(input())
+T=int(input())
+for _ in range(T):
+    k=int(input())
     minh=[]
     maxh=[]
     temp=[]
-    for _ in range(T):
+    length=0
+    for _ in range(k):
         cmd,mode=map(str,input().split())
         mode=int(mode)
         if cmd=='I':
             heapq.heappush(minh,mode)
             heapq.heappush(maxh,-mode)
-        elif mode==1:
-            heapq.heappop(maxh)
-        elif mode==0:
-            heapq.heappop(minh)
+            length+=1
+        elif length>=1:
+            length-=1
+            if mode==1:
+                heapq.heappop(maxh)
+            elif mode==-1:
+                heapq.heappop(minh)
+        if length==0:
+            minh.clear()
+            maxh.clear()
     while maxh:
-        temp.append(-1*heapq.heappop(maxh))
+        temp.append(-heapq.heappop(maxh))
     minh_set=set(minh)
     maxh_set=set(temp)
+    print(minh)
+    print(temp)
     common=(minh_set&maxh_set)
+    
     if common:
-        print(*common)
+        print(max(common),min(common))
     else:
         print('EMPTY')
