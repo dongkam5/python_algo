@@ -1,4 +1,4 @@
-# 연속 부분 수열 합의 개수
+# 프로그래머스 level2 연속 부분 수열 합의 개수
 from collections import deque
 def solution(elements):
     answer = 0
