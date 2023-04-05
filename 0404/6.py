@@ -1,4 +1,4 @@
-#프로그래머스 level2 귤 고르기
+# 프로그래머스 level2 귤 고르기
 from collections import defaultdict
 def solution(k, tangerine):
     answer = 0
