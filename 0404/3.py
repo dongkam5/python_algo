@@ -1,4 +1,4 @@
-#프로그래머스 level1 크기가 작은 부분 문자열
+# 프로그래머스 level1 크기가 작은 부분 문자열
 def solution(t, p):
     answer = 0
     len_p=len(p)
