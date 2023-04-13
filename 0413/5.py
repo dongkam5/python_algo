@@ -13,7 +13,6 @@ def solution(targets):
                 j+=1
             else:
                 break
-        i=i+j-1
-        i+=1
+        i=i+j
         answer+=1
     return answer
