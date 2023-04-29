@@ -1,6 +1,6 @@
 #프로그래머스 level1 명예의 전당 (1)
 def solution(k, score):
-    answer = []
+    answer = [] 
     lst=[]
     if k<=len(score):
         for i in range(k):
